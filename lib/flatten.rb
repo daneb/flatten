@@ -5,7 +5,7 @@ module Flatten
   class Error < StandardError; end
 
   def to_flat(array)
-    Helpers::Validation.validate_input(array)
+    Helpers::Validation.validate(array)
     flatten(array)
   rescue ArgumentError
     raise Error, 'Only integer arrays are supported'

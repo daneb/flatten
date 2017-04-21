@@ -32,7 +32,9 @@ RSpec.describe Flatten do
   
   describe 'error handling' do
     it 'catches unhandled exceptions' do
-
+      input = [1, 2, 3]
+      allow(Helpers::Validation).to receive(:validate).and_raise IndexError
+      expect { fl.to_flat(input) }.to raise_exception Flatten::Error
     end
 
     it 'raises an exception if the input is not an array' do
