@@ -38,8 +38,8 @@ RSpec.describe Flatten do
     end
 
     it 'raises an exception if the input is not an array' do
-      input = "symphony no.9"
-      expect{ fl.to_flat(input) }.to raise_exception Flatten::Error, "Only integer arrays are supported"
+      input = 'isymphony no.9'
+      expect{ fl.to_flat(input) }.to raise_exception Flatten::Error, 'Only integer arrays are supported'
     end
 
     it 'supports empty array as input' do
