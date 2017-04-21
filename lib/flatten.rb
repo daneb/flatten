@@ -17,6 +17,7 @@ module Flatten
 
   def flatten(array, result = [])
     return result if array.length.zero?
+    raise ArgumentError unless Helpers::Validation.only_integer_or_array_elements?(array)
     array[0].is_a?(Array) ? flatten(array[0], result) : result << array[0]
     flatten(array.drop(1), result)
   end

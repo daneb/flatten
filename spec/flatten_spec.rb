@@ -12,6 +12,24 @@ RSpec.describe Flatten do
   end
 
   describe 'use cases' do
+    it 'supports empty array as input' do
+      input = []
+      result = []
+      expect(fl.to_flat(input)).to eq result
+    end
+
+    it 'supports an existing flat array as input' do
+      input = [1, 2, 3]
+      result = [1, 2, 3]
+      expect(fl.to_flat(input)).to eq result
+    end
+
+    it 'supports an empty array in deeply nested arrays' do
+      input = [1, 2, 3, [], [4, 5, 6, [], [7, 8, 9, [10, 11, []]]], [], []]
+      result = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      expect(fl.to_flat(input)).to eq(result)
+    end
+
     it 'flattens a simple nested array' do
       simple_array = [1, [2, [3]], 4]
       result = [1, 2, 3, 4]
@@ -54,31 +72,13 @@ RSpec.describe Flatten do
     it 'raises an exception if the elements are not integers or arrays' do
       input = [1, 2, { some: 'hash' }]
       expect { fl.to_flat(input) }
-        .to raise_exception Flatten::Error , @only_integer_arrays_message
+        .to raise_exception Flatten::Error, @only_integer_arrays_message
     end
 
-    # it 'raise an exception if the elements are arrays but not integers' do
-    #   input = [1, 2, [1, 2, 3, [4, 5, 6, []]], [1, 'h', 'e', 'l', 'l', 'o']]
-    #   expect { fl.to_flat(input) }
-    #     .to raise_exception Flatten::Error, @only_integer_arrays_message
-    # end
-
-    it 'supports empty array as input' do
-      input = []
-      result = []
-      expect(fl.to_flat(input)).to eq result
-    end
-
-    it 'supports an existing flat array as input' do
-      input = [1, 2, 3]
-      result = [1, 2, 3]
-      expect(fl.to_flat(input)).to eq result
-    end
-
-    it 'supports an empty array in deeply nested arrays' do
-      input = [1, 2, 3, [], [4, 5, 6, [], [7, 8, 9, [10, 11, []]]], [], []]
-      result = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-      expect(fl.to_flat(input)).to eq(result)
+    it 'raise an exception if the elements are arrays but not integers' do
+      input = [1, 2, [1, 2, 3, [4, 5, 6, []]], [1, 'h', 'e', 'l', 'l', 'o']]
+      expect { fl.to_flat(input) }
+        .to raise_exception Flatten::Error, @only_integer_arrays_message
     end
   end
 
