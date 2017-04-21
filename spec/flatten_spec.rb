@@ -95,5 +95,20 @@ RSpec.describe Flatten do
   end
 
   describe 'non-functional requirements' do
+    it 'should flatten a larged nested array of integers in a reasonable time' do
+      # Produces a 1.7MB and processes it in under 30 seconds
+      # Poor performance 
+      #  expected: < 30
+      #     got:   82.8198759999359
+      big_array = []
+      result = []
+      (1..35).step do |x|
+        (1..x).step { |y| y.times { result << rand(0..60_000) } }
+        big_array << result
+      end
+      time = Benchmark.measure { fl.to_flat(big_array) }
+      p time.methods
+      expect(time.real).to be < 30 # seconds
+    end
   end
 end
