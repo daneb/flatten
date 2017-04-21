@@ -107,7 +107,6 @@ RSpec.describe Flatten do
         big_array << result
       end
       time = Benchmark.measure { fl.to_flat(big_array) }
-      p time.methods
       expect(time.real).to be < 30 # seconds
     end
   end

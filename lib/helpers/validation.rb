@@ -8,5 +8,10 @@ module Helpers
     def self.only_integer_or_array_elements?(array)
       array.all? { |i| i.is_a?(Integer) || i.is_a?(Array) }
     end
+
+    def self.integer?(element)
+      raise ArgumentError unless element.is_a?(Integer)
+      element
+    end
   end
 end
