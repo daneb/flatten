@@ -32,7 +32,32 @@ RSpec.describe Flatten do
   
   describe 'error handling' do
     it 'catches unhandled exceptions' do
+
     end
+
+    it 'raises an exception if the input is not an array' do
+      input = "symphony no.9"
+      expect{ fl.to_flat(input) }.to raise_exception Flatten::Error, "Only integer arrays are supported"
+    end
+
+    it 'supports empty array as input' do
+      input = []
+      result = []
+      expect(fl.to_flat(input)).to eq(result)
+    end
+
+    it 'supports an existing flat array as input' do
+      input = [1, 2, 3]
+      result = [1, 2, 3]
+      expect(fl.to_flat(input)).to eq(result)
+    end
+
+    it 'supports an empty array in deeply nested arrays' do
+      input = [1, 2, 3, [], [4, 5, 6, [], [7, 8, 9, [10, 11, []]]], [], []]
+      result = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+      expect(fl.to_flat(input)).to eq(result)
+    end
+
   end
   
   describe 'non-functional requirements' do
