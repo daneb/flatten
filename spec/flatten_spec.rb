@@ -47,6 +47,12 @@ RSpec.describe Flatten do
       result = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
       expect(fl.to_flat(multiples)).to eq(result)
     end
+
+    it 'does not remove duplicates if any' do
+      duplicate = [1, 2, [1, 2]]
+      result = [1, 2, 1, 2]
+      expect(fl.to_flat(duplicate)).to eq(result)
+    end
   end
 
   describe 'error handling' do
@@ -77,6 +83,12 @@ RSpec.describe Flatten do
 
     it 'raise an exception if the elements are arrays but not integers' do
       input = [1, 2, [1, 2, 3, [4, 5, 6, []]], [1, 'h', 'e', 'l', 'l', 'o']]
+      expect { fl.to_flat(input) }
+        .to raise_exception Flatten::Error, @only_integer_arrays_message
+    end
+
+    it 'raises an exception if the elements are another type of numeric' do
+      input = [1, 2, [3, 4, 4.0]]
       expect { fl.to_flat(input) }
         .to raise_exception Flatten::Error, @only_integer_arrays_message
     end
