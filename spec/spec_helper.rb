@@ -1,6 +1,7 @@
-require "bundler/setup"
-require "flatten"
+require 'bundler/setup'
+require 'flatten'
 require 'benchmark'
+require 'helpers/validation'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
