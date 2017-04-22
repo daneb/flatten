@@ -94,15 +94,15 @@ RSpec.describe Flatten do
 
   describe 'non-functional requirements' do
     it 'should flatten a larged nested array of integers in a reasonable time' do
-      # Produces a 1.7MB and processes it in under 30 seconds
+      # Produces a 1.7MB and processes it in under 1 seconds
       big_array = []
       result = []
-      (1..35).step do |x|
+      (1..35).step do |x| # Stack nests to deep at 40
         (1..x).step { |y| y.times { result << rand(0..60_000) } }
         big_array << result
       end
       time = Benchmark.measure { Flatten.to_flat(big_array) }
-      expect(time.real).to be < 30 # seconds
+      expect(time.real).to be < 1 # seconds
     end
   end
 end
