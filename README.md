@@ -1,8 +1,11 @@
 # Flatten
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/flatten`. To experiment with that code, run `bin/console` for an interactive prompt.
+Flattens an arbitrarily nested array of integers. 
 
-TODO: Delete this and the text above, and describe your gem
+e.g.
+```ruby
+[ 1, [ 2, [ 3 ] ], 4 ]  -> [ 1, 2, 3, 4 ] 
+```
 
 ## Installation
 
@@ -22,9 +25,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+irb(main):001:0> require 'flatten'
+=> true
+irb(main):002:0> input = [1, 2, 3, [], [4, 5, 6, [], [7, 8, 9, [10, 11, []]]], [], []]
+=> [1, 2, 3, [], [4, 5, 6, [], [7, 8, 9, [10, 11, []]]], [], []]
+irb(main):003:0> Flatten.to_flat(input)
+=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+irb(main):004:0>
+```
 
-## Development
+## Testing
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
