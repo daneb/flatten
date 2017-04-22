@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/daneb/flatten.svg?branch=master)](https://travis-ci.org/daneb/flatten)
+
 # Flatten
 
 Flattens an arbitrarily nested array of integers. 
