@@ -45,6 +45,15 @@ Test framework is RSpec.
 
 [CI](https://travis-ci.org/daneb/flatten) can be found here.
 
+## Documentation
+
+Basic documentation with YARD
+
+```ruby
+# yard doc
+# yard server
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/daneb/flatten. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
